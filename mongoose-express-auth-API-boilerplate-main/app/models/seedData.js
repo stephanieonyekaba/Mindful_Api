@@ -165,7 +165,11 @@ const Affirmations = require("./affirmation")
                 Affirmations.create(affirmations_list).then(() => {
                     console.log("affirmations data seeded.")})
                     // Close the db connection after the third seeding
-                    mongoose.connection.close()
+                    // mongoose.connection.close()
+        ////////////////////////////
+        // yoga poses error catchers
+        ////////////////////////////
+
         ////////////////////////////
         // yoga poses error catchers
         ////////////////////////////
@@ -178,23 +182,9 @@ const Affirmations = require("./affirmation")
                 .catch(error => {
                     console.log(error)
                     mongoose.connection.close()
-        ////////////////////////////
-        // yoga poses error catchers
-        ////////////////////////////
-                    })
-                .catch(error => {
-                    console.log(error)
-                    mongoose.connection.close()
                     })
                 })
-                .catch(error => {
-                    console.log(error)
-                    mongoose.connection.close()
-                    })
-                })
-                .catch(error => {
-                    console.log(error)
-                    mongoose.connection.close()
+
                 })
 
 
