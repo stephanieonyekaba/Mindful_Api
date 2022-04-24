@@ -3,8 +3,8 @@ const express = require('express')
 // Passport docs: http://www.passportjs.org/docs/
 const passport = require('passport')
 
-// pull in Mongoose model for yogas
-const Yoga = require('../models/yoga')
+// pull in Mongoose model for affirmations
+const Affirmation = require('../models/affirmation')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -17,7 +17,7 @@ const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 
 // this is middleware that will remove blank fields from `req.body`, e.g.
-// { yoga: { title: '', text: 'foo' } } -> { yoga: { text: 'foo' } }
+// { affirmation: { title: '', text: 'foo' } } -> { affirmation: { text: 'foo' } }
 const removeBlanks = require('../../lib/remove_blank_fields')
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
@@ -28,43 +28,43 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // INDEX
-// GET /yogas
-router.get('/yogas', (req, res, next) => {
-	Yoga.find()
-		.then((yogas) => {
-			// `yogas` will be an array of Mongoose documents
+// GET /affirmations
+router.get('/affirmations', (req, res, next) => {
+	Affirmation.find()
+		.then((affirmations) => {
+			// `affirmations` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
 			// apply `.toObject` to each one
-			return yogas.map((yoga) => yoga.toObject())
+			return affirmations.map((affirmation) => affirmation.toObject())
 		})
-		// respond with status 200 and JSON of the yogas
-		.then((yogas) => res.status(200).json({ yogas: yogas }))
+		// respond with status 200 and JSON of the affirmations
+		.then((affirmations) => res.status(200).json({ affirmations: affirmations }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 
 // SHOW
-// GET /yogas/5a7db6c74d55bc51bdf39793
-router.get('/yogas/:id', (req, res, next) => {
+// GET /affirmations/5a7db6c74d55bc51bdf39793
+router.get('/affirmations/:id', (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
-	Yoga.findById(req.params.id)
+	Affirmation.findById(req.params.id)
 		.then(handle404)
-		// if `findById` is succesful, respond with 200 and "yoga" JSON
-		.then((yoga) => res.status(200).json({ yoga: yoga.toObject() }))
+		// if `findById` is succesful, respond with 200 and "affirmations" JSON
+		.then((affirmation) => res.status(200).json({ affirmation: affirmation.toObject() }))
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
 
 // CREATE
-// POST /yogas
-router.post('/yogas', requireToken, (req, res, next) => {
-	// set owner of new yoga to be current user
-	req.body.yoga.owner = req.user.id
+// POST /affirmations
+router.post('/affirmations', requireToken, (req, res, next) => {
+	// set owner of new affirmation to be current user
+	req.body.affirmation.owner = req.user.id
 
-	Yoga.create(req.body.yoga)
-		// respond to succesful `create` with status 201 and JSON of new "yoga"
-		.then((yoga) => {
-			res.status(201).json({ yoga: yoga.toObject() })
+	Affirmation.create(req.body.affirmation)
+		// respond to succesful `create` with status 201 and JSON of new "affirmation"
+		.then((affirmation) => {
+			res.status(201).json({ affirmation: affirmation.toObject() })
 		})
 		// if an error occurs, pass it off to our error handler
 		// the error handler needs the error message and the `res` object so that it
@@ -73,21 +73,21 @@ router.post('/yogas', requireToken, (req, res, next) => {
 })
 
 // UPDATE
-// PATCH /yogas/5a7db6c74d55bc51bdf39793
-router.patch('/yogas/:id', requireToken, removeBlanks, (req, res, next) => {
+// PATCH /affirmations/5a7db6c74d55bc51bdf39793
+router.patch('/affirmations/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
-	delete req.body.yoga.owner
+	delete req.body.affirmation.owner
 
-	Yoga.findById(req.params.id)
+	Affirmation.findById(req.params.id)
 		.then(handle404)
-		.then((yoga) => {
+		.then((affirmation) => {
 			// pass the `req` object and the Mongoose record to `requireOwnership`
 			// it will throw an error if the current user isn't the owner
-			requireOwnership(req, yoga)
+			requireOwnership(req, affirmation)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
-			return yoga.updateOne(req.body.yoga)
+			return affirmation.updateOne(req.body.affirmation)
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
@@ -96,15 +96,15 @@ router.patch('/yogas/:id', requireToken, removeBlanks, (req, res, next) => {
 })
 
 // DESTROY
-// DELETE /yoga/5a7db6c74d55bc51bdf39793
-router.delete('/yogas/:id', requireToken, (req, res, next) => {
-	Yoga.findById(req.params.id)
+// DELETE /affirmation/5a7db6c74d55bc51bdf39793
+router.delete('/affirmations/:id', requireToken, (req, res, next) => {
+	Affirmation.findById(req.params.id)
 		.then(handle404)
-		.then((yoga) => {
-			// throw an error if current user doesn't own `yoga`
-			requireOwnership(req, yoga)
-			// delete the yoga ONLY IF the above didn't throw
-			yoga.deleteOne()
+		.then((affirmation) => {
+			// throw an error if current user doesn't own `affirmation`
+			requireOwnership(req, affirmation)
+			// delete the affirmation ONLY IF the above didn't throw
+			affirmation.deleteOne()
 		})
 		// send back 204 and no content if the deletion succeeded
 		.then(() => res.sendStatus(204))
