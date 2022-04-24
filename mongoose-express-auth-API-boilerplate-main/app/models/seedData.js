@@ -164,8 +164,7 @@ const Affirmations = require("./affirmation")
             Affirmations.remove({}).then(() => {
                 Affirmations.create(affirmations_list).then(() => {
                     console.log("affirmations data seeded.")})
-                    // Close the db connection after the third seeding
-                    // mongoose.connection.close()
+
         ////////////////////////////
         // yoga poses error catchers
         ////////////////////////////
