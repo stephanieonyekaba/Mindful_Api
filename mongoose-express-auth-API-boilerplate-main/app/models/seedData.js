@@ -12,6 +12,7 @@ const db = require("../../config/db")
 // 3. Bring in our models
 const Yogas = require("./yoga")
 const Affirmations = require("./affirmation")
+const Journals = require("./journal")
 
 
 
@@ -146,9 +147,6 @@ const Affirmations = require("./affirmation")
     ]
         
 
-
-
-
 //JOURNAL SEED DATA
 const starter_journals = [
     {
@@ -194,15 +192,24 @@ const starter_journals = [
             Affirmations.remove({}).then(() => {
                 Affirmations.create(affirmations_list).then(() => {
                     console.log("affirmations data seeded.")})
-
+                    
+        .then(() => {
+            Journals.remove({}).then(() => {
+                Journals.create(starter_journals).then(() => {
+                    console.log("journals data seeded.")})
         ////////////////////////////
         // yoga poses error catchers
         ////////////////////////////
 
         ////////////////////////////
-        // yoga poses error catchers
+        //  error catchers
         ////////////////////////////
                     })
+                .catch(error => {
+                    console.log(error)
+                    mongoose.connection.close()
+                    })
+                })
                 .catch(error => {
                     console.log(error)
                     mongoose.connection.close()
