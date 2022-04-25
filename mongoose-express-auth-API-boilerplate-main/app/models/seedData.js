@@ -145,6 +145,36 @@ const Affirmations = require("./affirmation")
         }
     ]
         
+
+
+
+
+//JOURNAL SEED DATA
+const starter_journals = [
+    {
+    "date": "04/20/22",
+    "entry": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+    "date": "04/22/2022",
+    "entry": "Sollicitudin aliquam ultrices sagittis orci a. Orci nulla pellentesque dignissim enim sit amet. Pellentesque adipiscing commodo elit at imperdiet dui accumsan. Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Vitae elementum curabitur vitae nunc. Mattis ullamcorper velit sed ullamcorper morbi. Tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Aliquet lectus proin nibh nisl condimentum id venenatis a condimentum. A condimentum vitae sapien pellentesque habitant morbi tristique. Ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant. Urna cursus eget nunc scelerisque viverra. Elit sed vulputate mi sit. Netus et malesuada fames ac. Phasellus vestibulum lorem sed risus ultricies. Egestas tellus rutrum tellus pellentesque eu tincidunt. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt. Non sodales neque sodales ut etiam sit."
+    },
+    {
+    "date": "04/13/2022",
+    "entry": "Eu nisl nunc mi ipsum faucibus vitae. Viverra mauris in aliquam sem fringilla. Ultrices dui sapien eget mi proin. Nulla facilisi etiam dignissim diam. Habitant morbi tristique senectus et. Consectetur libero id faucibus nisl. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. Eget arcu dictum varius duis. Turpis massa sed elementum tempus egestas. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Lectus proin nibh nisl condimentum. Bibendum neque egestas congue quisque egestas diam in. Accumsan in nisl nisi scelerisque eu ultrices vitae auctor."
+    }
+
+
+]
+
+
+
+
+
+
+
+
+
     
 
 //////////////////////////
