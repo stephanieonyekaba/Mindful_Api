@@ -150,7 +150,7 @@ const Journals = require("./journal")
 //JOURNAL SEED DATA
 const starter_journals = [
     {
-    "date": "04/20/22",
+    "date": "04/20/2022",
     "entry": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     },
     {
@@ -161,9 +161,9 @@ const starter_journals = [
     "date": "04/13/2022",
     "entry": "Eu nisl nunc mi ipsum faucibus vitae. Viverra mauris in aliquam sem fringilla. Ultrices dui sapien eget mi proin. Nulla facilisi etiam dignissim diam. Habitant morbi tristique senectus et. Consectetur libero id faucibus nisl. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. Eget arcu dictum varius duis. Turpis massa sed elementum tempus egestas. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec. Lectus proin nibh nisl condimentum. Bibendum neque egestas congue quisque egestas diam in. Accumsan in nisl nisi scelerisque eu ultrices vitae auctor."
     }
-
-
 ]
+
+
 
 
 
@@ -205,6 +205,11 @@ const starter_journals = [
         //  error catchers
         ////////////////////////////
                     })
+                .catch(error => {
+                    console.log(error)
+                    mongoose.connection.close()
+                    })
+                })
                 .catch(error => {
                     console.log(error)
                     mongoose.connection.close()
