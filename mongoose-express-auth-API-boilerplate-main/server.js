@@ -5,6 +5,7 @@ const cors = require('cors')
 
 // require route files
 const yogaRoutes = require('./app/routes/yoga_routes')
+const journalRoutes = require('./app/routes/journal_routes')
 const affirmationRoutes = require('./app/routes/affirmation_routes')
 const userRoutes = require('./app/routes/user_routes')
 
@@ -69,6 +70,7 @@ app.use(requestLogger)
 app.use(userRoutes)
 app.use(yogaRoutes)
 app.use(affirmationRoutes)
+app.use(journalRoutes)
 
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
