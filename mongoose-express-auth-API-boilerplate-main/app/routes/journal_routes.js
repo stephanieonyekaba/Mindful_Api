@@ -74,20 +74,20 @@ router.post('/journals', requireToken, (req, res, next) => {
 
 // UPDATE
 // PATCH /journals/5a7db6c74d55bc51bdf39793
-router.patch('/journals/:id', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/journals/:id', removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
-	delete req.body.journal.owner
+	// delete req.body.journal.owner
 
 	Journal.findById(req.params.id)
 		.then(handle404)
 		.then((journal) => {
 			// pass the `req` object and the Mongoose record to `requireOwnership`
 			// it will throw an error if the current user isn't the owner
-			requireOwnership(req, journal)
+			// requireOwnership(req, journal)
 
 			// pass the result of Mongoose's `.update` to the next `.then`
-			return journal.updateOne(req.body.journal)
+			return journal.updateOne({entry: req.body.entry})
 		})
 		// if that succeeded, return 204 and no JSON
 		.then(() => res.sendStatus(204))
@@ -102,7 +102,7 @@ router.delete('/journals/:id', requireToken, (req, res, next) => {
 		.then(handle404)
 		.then((journal) => {
 			// throw an error if current user doesn't own `journal`
-			requireOwnership(req, journal)
+			// requireOwnership(req, journal)
 			// delete the journal ONLY IF the above didn't throw
 			journal.deleteOne()
 		})
