@@ -66,7 +66,7 @@ router.post('/yoga/favorites/:id', requireToken, (req, res, next) => {
 			.then((user) => {
 				//here we are pushing each yoga id into the favoriteYoga array
 				//we use the user.favoriteYoga syntax because it refers to the model in user(the schema for favoriteYoga has an empty array)
-				console.log("THIS YOGAA", user)
+				console.log("IS THIS WORKING??", favoriteYogas)
 				user.favoriteYogas.push(yoga)
 				return user.save();
 			})
