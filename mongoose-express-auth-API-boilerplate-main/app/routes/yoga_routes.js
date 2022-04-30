@@ -58,7 +58,7 @@ router.get('/yogas/:id', (req, res, next) => {
 // CREATE
 // POST /yogas
 router.post('/yoga/favorites/:id', requireToken, (req, res, next) => {
-	const yoga = req.params.idn
+	const yoga = req.params.id
 	//getting our user id
 	const userId = req.user.id; 
 	User.findById(userId)
