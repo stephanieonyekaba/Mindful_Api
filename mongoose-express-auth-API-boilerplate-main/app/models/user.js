@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema(
 			required: true,
 			unique: true,
 		},
+		favoriteYogas: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Yoga",
+            required: false
+        }],
 		hashedPassword: {
 			type: String,
 			required: true,

@@ -5,7 +5,7 @@ const passport = require('passport')
 
 // pull in Mongoose model for yogas
 const Yoga = require('../models/yoga')
-
+const User = require('../models/user')
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
 const customErrors = require('../../lib/custom_errors')
@@ -57,19 +57,19 @@ router.get('/yogas/:id', (req, res, next) => {
 
 // CREATE
 // POST /yogas
-router.post('/yogas', requireToken, (req, res, next) => {
-	// set owner of new yoga to be current user
-	req.body.yoga.owner = req.user.id
-
-	Yoga.create(req.body.yoga)
-		// respond to succesful `create` with status 201 and JSON of new "yoga"
-		.then((yoga) => {
-			res.status(201).json({ yoga: yoga.toObject() })
-		})
-		// if an error occurs, pass it off to our error handler
-		// the error handler needs the error message and the `res` object so that it
-		// can send an error message back to the client
-		.catch(next)
+router.post('/yoga/favorites/:id', requireToken, (req, res, next) => {
+	const yoga = req.params.idn
+	//getting our user id
+	const userId = req.user.id; 
+	User.findById(userId)
+			.then(handle404)
+			.then((user) => {
+				//here we are pushing each yoga id into the favoriteYoga array
+				//we use the user.favoriteYoga syntax because it refers to the model in user(the schema for favoriteYoga has an empty array)
+				console.log("THIS YOGAA", user)
+				user.favoriteYogas.push(yoga)
+				return user.save();
+			})
 })
 
 // UPDATE
