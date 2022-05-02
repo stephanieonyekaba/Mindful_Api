@@ -59,9 +59,10 @@ router.get('/yogas/:id', (req, res, next) => {
 // POST /yogas
 router.post('/yoga/favorites/:id', requireToken, (req, res, next) => {
 	const yoga = req.params.id
+	console.log(yoga)
 	//getting our user id
 	const userId = req.user.id; 
-	User.findById(userId)
+	User.findById(user)
 			.then(handle404)
 			.then((user) => {
 				//here we are pushing each yoga id into the favoriteYoga array

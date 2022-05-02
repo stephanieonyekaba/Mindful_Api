@@ -28,14 +28,15 @@ const router = express.Router()
 
 
 // GET /favoriteYogas
-router.get('/favoriteYogas', (req, res, next) => {
-	User.find()
-		.then((favoriteYogas) => {
-			console.log("HELLO?", favoriteYogas)
+router.get('/favoriteYogas/:userId', (req, res, next) => {
+	User.findById(req.params.userId)
+		.then((user) => {
+		
+			console.log("HELLO?", user)
 			// `yogas` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
 			// apply `.toObject` to each one
-			return favoriteYogas.map((favoriteYoga) => favoriteYoga.toObject())
+			return user.favoriteYogas.map((favoriteYoga) => favoriteYoga.toObject())
 		})
 		// respond with status 200 and JSON of the yogas
 		.then((favoriteYogas) => res.status(200).json({ favoriteYogas: favoriteYogas }))
