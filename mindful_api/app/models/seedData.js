@@ -194,7 +194,7 @@ const starter_journals = [
                     console.log("affirmations data seeded.")})
                     
         .then(() => {
-            Journals.remove({}).then(() => {
+            Journals.deleteMany({owner: null}).then(deletedJournals => {
                 Journals.create(starter_journals).then(() => {
                     console.log("journals data seeded.")})
         ////////////////////////////

@@ -5,7 +5,7 @@ const passport = require('passport')
 
 // pull in Mongoose model for journals
 const Journal = require('../models/journal')
-
+const User = require('../models/user')
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
 const customErrors = require('../../lib/custom_errors')

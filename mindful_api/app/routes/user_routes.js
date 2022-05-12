@@ -32,7 +32,7 @@ router.get('/favoriteYogas/:userId', (req, res, next) => {
 	User.findById(req.params.userId)
 		.then((user) => {
 		
-			console.log("HELLO?", user)
+			console.log("user", user)
 			// `yogas` will be an array of Mongoose documents
 			// we want to convert each one to a POJO, so we use `.map` to
 			// apply `.toObject` to each one

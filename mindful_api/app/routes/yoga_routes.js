@@ -55,23 +55,103 @@ router.get('/yogas/:id', (req, res, next) => {
 		.catch(next)
 })
 
+
 // CREATE
 // POST /yogas
 router.post('/yoga/favorites/:id', requireToken, (req, res, next) => {
 	const yoga = req.params.id
-	console.log(yoga)
+	console.log("this is the yoga id from the axios call", yoga)
 	//getting our user id
-	const userId = req.user.id; 
-	User.findById(user)
-			.then(handle404)
-			.then((user) => {
-				//here we are pushing each yoga id into the favoriteYoga array
-				//we use the user.favoriteYoga syntax because it refers to the model in user(the schema for favoriteYoga has an empty array)
-				console.log("IS THIS WORKING??", favoriteYogas)
-				user.favoriteYogas.push(yoga)
-				return user.save();
-			})
+	const userId = req.user.id
+	console.log("this is the user id from the axios call", userId)
+	User.findById(userId)
+		.then(handle404)
+		.then((userId) => {
+			//here we are pushing each yoga id into the favoriteYoga array
+			//we use the user.favoriteYoga syntax because it refers to the model in user(the schema for favoriteYoga has an empty array)
+			// return user.save();
+			userId.favoriteYogas.push(yoga);
+			
+			console.log("favoriteyoga array", userId.favoriteYogas)
+			return userId.save();
+		})
 })
+
+
+
+
+
+
+
+
+
+// // PATCH ROUTE FOR ADD FAVORITE YOGA
+// // PATCH /yogas/5a7db6c74d55bc51bdf39793
+// router.patch('/yogas/:id', requireToken, removeBlanks, (req, res, next) => {
+// 	// if the client attempts to change the `owner` property by including a new
+// 	// owner, prevent that by deleting that key/value pair
+// 	delete req.body.yoga.owner
+
+// 	Yoga.findById(req.params.id)
+// 		.then(handle404)
+// 		.then((yoga) => {
+// 			// pass the `req` object and the Mongoose record to `requireOwnership`
+// 			// it will throw an error if the current user isn't the owner
+// 			requireOwnership(req, yoga)
+
+// 			// pass the result of Mongoose's `.update` to the next `.then`
+// 			return yoga.updateOne(req.body.yoga)
+// 		})
+// 		// if that succeeded, return 204 and no JSON
+// 		.then(() => res.sendStatus(204))
+// 		// if an error occurs, pass it to the handler
+// 		.catch(next)
+// })
+
+
+
+
+// // PATCH ROUTE FOR ADD FAVORITE YOGA 2ND ATTEMPT 
+// // PATCH /examples/5a7db6c74d55bc51bdf39793
+// router.patch('/yogas/:id', requireToken, removeBlanks, (req, res, next) => {
+// 	// if the client attempts to change the `owner` property by including a new
+// 	// owner, prevent that by deleting that key/value pair
+//     const yogaId = req.params.yogaId
+
+// 	Yoga.findById(yogaId)
+// 		.then(handle404)
+// 		.then((yoga) => {
+// 			console.log("this is the yoga id", yogaId)
+// 			user.favoriteYogas.push(yogaId)
+//                 .catch(next)
+// 		})
+// 	// if that succeeded, return 204 and no JSON
+// 	.then(() => res.sendStatus(204))
+// 	// if an error occurs, pass it to the handler
+// 	.catch(next)
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // UPDATE
 // PATCH /yogas/5a7db6c74d55bc51bdf39793
