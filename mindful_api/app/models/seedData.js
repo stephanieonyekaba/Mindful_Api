@@ -15,7 +15,7 @@ const Affirmations = require("./affirmation")
 const Journals = require("./journal")
 
 
-
+//comment
 //YOGA SEED DATA 
 
     const yoga_poses = [
