@@ -13,6 +13,7 @@ const db = require("../../config/db")
 const Yogas = require("./yoga")
 const Affirmations = require("./affirmation")
 const Journals = require("./journal")
+const Reviews = require("./review")
 
 
 //comment
@@ -163,8 +164,36 @@ const starter_journals = [
     }
 ]
 
+//REVIEWS SEED DATA 
+const reviews_data = [
+    {
+        "img_url": "https://i.ibb.co/BVJHMf2/Screen-Shot-2022-09-04-at-11-32-55-PM.png",
+        "name":"Anna",
+        "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit"
+},
+{
+    "img_url": "https://i.ibb.co/Jkdpd5K/Screen-Shot-2022-09-04-at-11-33-39-PM.png",
+    "name":"Kevin",
+    "quote": "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!"
+},
+{
+    "img_url": "https://i.ibb.co/t3mS5c9/Screen-Shot-2022-09-04-at-11-34-25-PM.png ",
+    "name":"Maureen",
+    "quote": "Generate Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!"
+},
+{
+    "img_url": "https://i.ibb.co/2PGSmr7/Screen-Shot-2022-09-04-at-11-35-31-PM.png ",
+    "name":"Rachel",
+    "quote": "Hello Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!"
+},
+{
+    "img_url": "https://i.ibb.co/YtCttrb/Screen-Shot-2022-09-04-at-11-36-26-PM.png ",
+    "name":"James",
+    "quote": "Wow Lorem Ipsum placeholder text. Select the number of characters, words, sentences or paragraphs, and hit generate!"
+}
 
 
+]
 
 
 
@@ -193,6 +222,12 @@ const starter_journals = [
                 Affirmations.create(affirmations_list).then(() => {
                     console.log("affirmations data seeded.")})
                     
+        .then(() => {
+            Reviews.remove({}).then(() => {
+                Reviews.create(reviews_data).then(() => {
+                    console.log("reviews data seeded.")})
+
+        
         .then(() => {
             Journals.deleteMany({owner: null}).then(deletedJournals => {
                 Journals.create(starter_journals).then(() => {
@@ -226,7 +261,14 @@ const starter_journals = [
                     })
                 })
 
+                .catch(error => {
+                    console.log(error)
+                    mongoose.connection.close()
+                    })
                 })
+
+                })
+            })
 
 
 //////////////////////////
