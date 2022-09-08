@@ -10,12 +10,12 @@ authentication and common middlewares.
    folder) -- **NOTE:** if the folder was already unzipped, use the `mv` command
    line to move it to the `sei/projects/` directory.
 1. Rename the directory from express-auth-template -> your-app-name.
-1. Rename [`README.md`](README.md) to `REF.md` and use as a reference, create a new README and fill with your own content.
+1. Rename [`README.md`](README.md) to `REF.md` and use as a reference, create a new README and fill with your own content.this is another note
 1. Move into the new project and `git init`.
 1. Replace all instances of `'express-auth-template'` with your app name.
 1. Install dependencies with `npm install`.
 1. Ensure that you have `nodemon` installed by running `npm install -g nodemon`.
-2. Once everything is working, make an initial commit.
+1. Once everything is working, make an initial commit.
 
 ## Structure
 
@@ -60,10 +60,10 @@ Add your own scripts to test your custom API.
 
 ### Authentication
 
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
+| Verb   | URI Pattern         | Controller#Action |
+| ------ | ------------------- | ----------------- |
+| POST   | `/sign-up`          | `users#signup`    |
+| POST   | `/sign-in`          | `users#signin`    |
 | PATCH  | `/change-password/` | `users#changepw`  |
 | DELETE | `/sign-out/`        | `users#signout`   |
 
@@ -94,10 +94,10 @@ HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
 
 {
-  "user": {
-    "id": 1,
-    "email": "an@example.email"
-  }
+"user": {
+"id": 1,
+"email": "an@example.email"
+}
 }
 ```
 
@@ -127,11 +127,11 @@ HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
 {
-  "user": {
-    "id": 1,
-    "email": "an@example.email",
-    "token": "33ad6372f795694b333ec5f329ebeaaa"
-  }
+"user": {
+"id": 1,
+"email": "an@example.email",
+"token": "33ad6372f795694b333ec5f329ebeaaa"
+}
 }
 ```
 
